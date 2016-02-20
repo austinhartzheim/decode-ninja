@@ -5,11 +5,13 @@ function RuleHighlightNewLines() {
     this.fields = {
         color_fg: {
             name: 'Foreground Color',
-            value: 'black'
+            value: 'black',
+            type: 'text'
         },
         color_bg: {
             name: 'Background Color',
-            value: 'white'
+            value: 'white',
+            type: 'text'
         }
     };
     
@@ -32,11 +34,13 @@ function RuleHighlightNullBytes() {
     this.fields = {
         color_fg: {
             name: 'Foreground Color',
-            value: 'white'
+            value: 'white',
+            type: 'text'
         },
         color_bg: {
             name: 'Background Color',
-            value: 'red'
+            value: 'red',
+            type: 'text'
         }
     };
 
@@ -59,11 +63,13 @@ function RuleFindConstantBytes() {
     this.fields = {
         byte_sequence: {
             name: 'Byte Sequence',
-            value: '0,0'
+            value: '0,0',
+            type: 'text'
         },
         comment: {
             name: 'Comment',
-            value: ''
+            value: '',
+            type: 'text'
         }
     };
 
@@ -101,11 +107,13 @@ function RuleComment() {
     this.fields = {
         byte_index: {
             name: 'Byte Index',
-            value: 0
+            value: 0,
+            type: 'number'
         },
         comment: {
             name: 'Comment',
-            value: ''
+            value: '',
+            type: 'text'
         }
     };
 
