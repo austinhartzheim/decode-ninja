@@ -22,6 +22,10 @@ function RuleHighlightNewLines() {
             bytes[i].style.color = this.fields.color_fg.value;
         }
     };
+
+    this.post_apply = function(bytes) {
+
+    };
 }
 rules.push({
     name: 'Highlight Newlines',
@@ -50,6 +54,10 @@ function RuleHighlightNullBytes() {
             bytes[i].style.background = this.fields.color_bg.value;
             bytes[i].style.color = this.fields.color_fg.value;
         }
+    };
+
+    this.post_apply = function(bytes) {
+
     };
 }
 rules.push({
@@ -95,6 +103,10 @@ function RuleFindConstantBytes() {
             }
         }
     };
+
+    this.post_apply = function(bytes) {
+
+    };
 }
 rules.push({
     name: 'Find Constant Byte Sequences',
@@ -124,6 +136,10 @@ function RuleComment() {
             bytes[i].style['border-style'] = 'solid';
             bytes[i].style['border-color'] = 'orange';
         }
+    };
+
+    this.post_apply = function(bytes) {
+
     };
 }
 rules.push({
