@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="decodeninja">
+  <head>
+    <title>decode.ninja - collaborative binary reverse engineering</title>
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      decode.ninja
+    </header>
+
+    <section id="main" ng-controller="DecodeController as dc">
+      <div id="pane-upload-file" ng-if="dc.pane === 'pane-upload-file'">
+	    <h1>select a file</h1>
+	    <p><input id="file-upload" type="file"
+                  onchange="angular.element(this).scope().dc.file_changed(this.files[0])" />
+	    <p><button id="process-button" ng-click="dc.check_file(); dc.pane='pane-decode'">Process</button></p>
+      </div>
+      
+      <div id="pane-decode" ng-if="dc.pane === 'pane-decode'">
+	    <h1>decode</h1>
+	    <div id="data-view">
+          <span ng-repeat="byte in dc.bytes track by $index" class="byte">{{ byte.toString(16) }}</span>
+	    </div>
+      </div>
+    </section>
+  </body>
+</html>

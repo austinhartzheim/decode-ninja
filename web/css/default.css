@@ -1,0 +1,17 @@
+body {
+    background: black;
+    color: white;
+}
+
+header {
+    border-bottom: 1px solid white;
+}
+
+.byte {
+    margin: 4px;
+    background: #2a2a2a;
+    font-family: monospace;
+    width: 2em;
+    display: inline-block;
+    text-align: center;
+}
