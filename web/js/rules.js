@@ -130,16 +130,15 @@ function RuleComment() {
     };
 
     this.name = 'Comment';
+
     this.apply = function(bytes, i) {
-        if (i == this.fields.byte_index.value) {
-            bytes[i].style['border-width'] = 1;
-            bytes[i].style['border-style'] = 'solid';
-            bytes[i].style['border-color'] = 'orange';
-        }
+
     };
-
+    
     this.post_apply = function(bytes) {
-
+        bytes[this.fields.byte_index.value].style['border-width'] = 1;
+        bytes[this.fields.byte_index.value].style['border-style'] = 'solid';
+        bytes[this.fields.byte_index.value].style['border-color'] = 'orange';
     };
 }
 rules.push({

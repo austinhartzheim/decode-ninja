@@ -48,6 +48,9 @@ angular.module('decodeninja', [])
                     dc.rules[j].apply(dc.bytes, i);
                 }
             }
+            for (j = 0; j < dc.rules.length; j++) {
+                dc.rules[j].post_apply(dc.bytes);
+            }
         };
 
         this.reset_colors = function() {
