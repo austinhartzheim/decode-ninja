@@ -2,14 +2,22 @@ var rules = [];
 
 
 function RuleHighlightNewLines() {
-    this.color_bg = 'white';
-    this.color_fg = 'black';
+    this.fields = {
+        color_fg: {
+            name: 'Foreground Color',
+            value: 'black'
+        },
+        color_bg: {
+            name: 'Background Color',
+            value: 'white'
+        }
+    };
     
     this.name = 'Highlight Newlines';
     this.apply = function(bytes, i) {
         if (bytes[i].d == 10) {
-            bytes[i].style.background = this.color_bg;
-            bytes[i].style.color = this.color_fg;
+            bytes[i].style.background = this.fields.color_bg.value;
+            bytes[i].style.color = this.fields.color_fg.value;
         }
     };
 }

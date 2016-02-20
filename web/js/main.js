@@ -31,21 +31,26 @@ angular.module('decodeninja', [])
                         });
                     }
                     dc.pane = 'pane-decode';
+                    dc.apply_rules();
                 });
             });
             reader.readAsText(file);
         };
 
+        this.list_available_rules = function() {
+            return rules;
+        };
+
         this.apply_rules = function() {
-            rule_highlight_newlines = new RuleHighlightNewLines();
-            $scope.$apply(function() {
-                for (i = 0; i < dc.bytes.length; i++) {
-//                    if (dc.bytes[i].d == 10) {
-//                        dc.bytes[i].style.background = 'white';
-//                        dc.bytes[i].style.color = 'black';
-                    //                    }
-                    rule_highlight_newlines.apply(dc.bytes, i);
+            for (i = 0; i < dc.bytes.length; i++) {
+                for (j = 0; j < dc.rules.length; j++) {
+                    dc.rules[j].apply(dc.bytes, i);
                 }
-            });
+            }
+        };
+
+        this.add_rule = function(rule) {
+            this.rules.push(new rule());
+            this.apply_rules();
         };
     }]);

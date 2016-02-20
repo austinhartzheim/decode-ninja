@@ -35,9 +35,30 @@
              class="byte"
              ng-style="byte.style"
              ng-repeat="byte in dc.bytes">{{ byte.c }}</span>
-          </span>
         </div>
       </div>
+
+      <div id="rules-box">
+        <h1>add a rule</h1>
+        <div
+           ng-repeat="rule in dc.list_available_rules()"
+           ng-click="dc.add_rule(rule.obj);">
+          
+          {{ rule.name }}
+        </div>
+
+        <h1>current rules</h1>
+        <div
+           ng-repeat="rule in dc.rules">
+          {{ rule.name }}
+          <div ng-repeat="field in rule.fields">
+            {{ field.name }}:
+            <input type="text" ng-model="field.value"
+                   ng-change="dc.apply_rules()" />
+          </div>
+        </div>
+      </div>
+      
     </section>
   </body>
 </html>
