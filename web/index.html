@@ -42,7 +42,8 @@
         <h1>add a rule</h1>
         <div
            ng-repeat="rule in dc.list_available_rules()"
-           ng-click="dc.add_rule(rule.obj);">
+           ng-click="dc.add_rule(rule.obj);"
+           title="{{ rule.desc }}">
           
           {{ rule.name }}
         </div>
@@ -50,7 +51,7 @@
         <h1>current rules</h1>
         <div
            ng-repeat="rule in dc.rules">
-          {{ rule.name }}
+          <h2>{{ rule.name }}</h2>
           <div ng-repeat="field in rule.fields">
             {{ field.name }}:
             <input type="text" ng-model="field.value"
