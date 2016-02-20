@@ -14,4 +14,20 @@ header {
     width: 2em;
     display: inline-block;
     text-align: center;
+    white-space: pre;
+}
+.byte:hover {
+    background: #444;
+}
+
+.packet {
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+#binary-view,
+#char-view {
+    width: 60ex;
+    float: left;
 }

@@ -1,3 +1,9 @@
+// packet layout
+// {
+//   'bytes': [],
+//   'style': []
+// }
+
 angular.module('decodeninja', [])
     .controller('DecodeController', ['$scope', function($scope) {
         dc = this;
@@ -6,6 +12,7 @@ angular.module('decodeninja', [])
         this.plain = [];
         this.rules = [];
         this.upload_box = null;
+        this.hover_index = -1;
         this.check_file = function() {
             console.log('triggered');
             console.log(this.upload_box);
@@ -15,10 +22,12 @@ angular.module('decodeninja', [])
             reader = new FileReader();
             reader.addEventListener('loadend', function() {
                 $scope.$apply(function() {
-                    console.log(reader.result);
+                    packet = {bytes: []};
                     for (i = 0; i < reader.result.length; i++) {
-                        dc.bytes.push(reader.result.charCodeAt(i));
-                        dc.plain.push(reader.result.charAt(i));
+                        dc.bytes.push({
+                            d: reader.result.charCodeAt(i),
+                            c: reader.result.charAt(i)
+                        });
                     }
                     dc.pane = 'pane-decode';
                 });

@@ -21,9 +21,19 @@
       
       <div id="pane-decode" ng-if="dc.pane === 'pane-decode'">
 	    <h1>decode</h1>
-	    <div id="data-view">
-          <span ng-repeat="byte in dc.bytes track by $index" class="byte">{{ byte.toString(16) }}</span>
+	    <div id="binary-view">
+          <span class="byte"
+                id="byte-{{$index}}"
+                ng-repeat="byte in dc.bytes track by $index">{{ byte.d.toString(16); }}</span>
 	    </div>
+        
+        <div id="char-view">
+          <span
+             id="char-{{$index}}"
+             class="byte"
+             ng-repeat="byte in dc.bytes">{{ byte.c }}</span>
+          </span>
+        </div>
       </div>
     </section>
   </body>
