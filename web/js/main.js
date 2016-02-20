@@ -22,19 +22,23 @@ angular.module('decodeninja', [])
             reader = new FileReader();
             reader.addEventListener('loadend', function() {
                 $scope.$apply(function() {
-                    packet = {bytes: []};
-                    for (i = 0; i < reader.result.length; i++) {
-                        dc.bytes.push({
-                            d: reader.result.charCodeAt(i),
-                            c: get_char(reader.result.charCodeAt(i)),
-                            style: {}
-                        });
-                    }
+                    dc.parseTextToBytes(reader.result);
                     dc.pane = 'pane-decode';
                     dc.apply_rules();
                 });
             });
             reader.readAsText(file);
+        };
+
+        this.parseTextToBytes = function(text) {
+            dc.bytes = [];
+            for (i = 0; i < text.length; i++) {
+                dc.bytes.push({
+                    d: text.charCodeAt(i),
+                    c: get_char(text.charCodeAt(i)),
+                    style: {}
+                });
+            }
         };
 
         this.list_available_rules = function() {
