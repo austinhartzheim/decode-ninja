@@ -60,4 +60,9 @@ angular.module('decodeninja', [])
             this.rules.push(new rule());
             this.apply_rules();
         };
+
+        this.remove_rule = function(index) {
+            this.rules.pop(index);
+            this.apply_rules();
+        };
     }]);
