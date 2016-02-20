@@ -40,7 +40,7 @@ function RuleHighlightNullBytes() {
         }
     };
 
-    this,name = 'Highlight Null Bytes'
+    this,name = 'Highlight Null Bytes';
     this.apply = function(bytes, i) {
         if (bytes[i].d == 0) {
             bytes[i].style.background = this.fields.color_bg.value;
