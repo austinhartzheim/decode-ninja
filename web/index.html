@@ -22,8 +22,8 @@
       </div>
       
       <div id="pane-decode" ng-if="dc.pane === 'pane-decode'">
-	    <h3>decode</h3>
 	    <div id="binary-view">
+          <h2>Hex View</h2>
           <span class="byte"
                 id="byte-{{$index}}"
                 ng-style="byte.style"
@@ -33,6 +33,7 @@
 	    </div>
         
         <div id="char-view">
+          <h2>Text View</h2>
           <span
              id="char-{{$index}}"
              class="byte"
@@ -55,6 +56,9 @@
         </div>
 
         <h2>Applied Processors</h2>
+        <div ng-if="dc.rules.length == 0">
+          <p>No processors currently applied.</p>
+        </div>
         <div
            ng-repeat="rule in dc.rules"
            class="rule">
