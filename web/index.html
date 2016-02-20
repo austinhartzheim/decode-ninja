@@ -52,7 +52,7 @@
         <div
            ng-repeat="rule in dc.rules">
           <h2>{{ rule.name }}</h2>
-          <div ng-repeat="field in rule.fields">
+          <div ng-repeat="field in rule.fields track by $index">
             {{ field.name }}:
             <input type="text" ng-model="field.value"
                    ng-change="dc.apply_rules()" />
