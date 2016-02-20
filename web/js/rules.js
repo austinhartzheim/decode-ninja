@@ -60,6 +60,10 @@ function RuleFindConstantBytes() {
         byte_sequence: {
             name: 'Byte Sequence',
             value: '0,0'
+        },
+        comment: {
+            name: 'Comment',
+            value: ''
         }
     };
 
@@ -69,7 +73,7 @@ function RuleFindConstantBytes() {
     this.apply = function(bytes, i) {
         target = this.fields.byte_sequence.value.split(',');
         if (target.length == 0) return;
-        for (j = 0; j < target.length; j++)
+        for (var j = 0; j < target.length; j++)
             target[j] = parseInt(target[j], 16);
 
         if (bytes[i].d == target[this.sequence_index]) {
@@ -79,7 +83,7 @@ function RuleFindConstantBytes() {
         }
         if (this.sequence_index >= target.length) {
             for (j = i; j > i - target.length; j--) {
-                console.log('Recoloring byte', j);
+//                console.log('Recoloring byte', j);
                 bytes[j].style.background = 'yellow';
                 bytes[j].style.color = 'black';
             }
