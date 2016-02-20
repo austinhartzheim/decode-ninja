@@ -9,12 +9,15 @@ header {
 
 .byte {
     margin: 4px;
+    padding: 2px;
     background: #2a2a2a;
     font-family: monospace;
     width: 2em;
     display: inline-block;
     text-align: center;
     white-space: pre;
+    border-color: white;  /* Not expressed here; activated via JS on hover */
+    box-sizing: border-box;
 }
 .byte:hover {
     background: #444;
@@ -31,6 +34,7 @@ header {
 #rules-box {
     width: 60ex;
     float: left;
+    margin-left: 10px;
 }
 
 .rule {

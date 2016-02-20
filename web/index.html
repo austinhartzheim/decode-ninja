@@ -27,6 +27,8 @@
           <span class="byte"
                 id="byte-{{$index}}"
                 ng-style="byte.style"
+                ng-mouseenter="dc.activate_hover($index);"
+                ng-mouseleave="dc.deactivate_hover($index);"
                 ng-repeat="byte in dc.bytes track by $index">{{ byte.d.toString(16); }}</span>
 	    </div>
         
@@ -35,6 +37,8 @@
              id="char-{{$index}}"
              class="byte"
              ng-style="byte.style"
+             ng-mouseenter="dc.activate_hover($index);"
+             ng-mouseleave="dc.deactivate_hover($index);"
              ng-repeat="byte in dc.bytes">{{ byte.c }}</span>
         </div>
       </div>

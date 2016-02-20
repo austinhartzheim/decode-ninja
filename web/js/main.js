@@ -65,4 +65,11 @@ angular.module('decodeninja', [])
             this.rules.pop(index);
             this.apply_rules();
         };
+
+        this.activate_hover = function(index) {
+            this.bytes[index].style.opacity = 0.65;
+        };
+        this.deactivate_hover = function(index) {
+            this.bytes[index].style.opacity = 1;
+        };
     }]);

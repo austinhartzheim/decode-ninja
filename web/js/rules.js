@@ -95,3 +95,31 @@ rules.push({
     desc: '...',
     obj: RuleFindConstantBytes
 });
+
+
+function RuleComment() {
+    this.fields = {
+        byte_index: {
+            name: 'Byte Index',
+            value: 0
+        },
+        comment: {
+            name: 'Comment',
+            value: ''
+        }
+    };
+
+    this.name = 'Comment';
+    this.apply = function(bytes, i) {
+        if (i == this.fields.byte_index.value) {
+            bytes[i].style['border-width'] = 1;
+            bytes[i].style['border-style'] = 'solid';
+            bytes[i].style['border-color'] = 'orange';
+        }
+    };
+}
+rules.push({
+    name: 'Comment',
+    desc: 'Place a comment on a specific byte,',
+    obj: RuleComment
+});
