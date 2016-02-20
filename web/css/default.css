@@ -27,7 +27,8 @@ header {
 }
 
 #binary-view,
-#char-view {
+#char-view,
+#rules-box {
     width: 60ex;
     float: left;
 }

@@ -26,7 +26,7 @@ angular.module('decodeninja', [])
                     for (i = 0; i < reader.result.length; i++) {
                         dc.bytes.push({
                             d: reader.result.charCodeAt(i),
-                            c: reader.result.charAt(i),
+                            c: get_char(reader.result.charCodeAt(i)),
                             style: {}
                         });
                     }
@@ -42,10 +42,17 @@ angular.module('decodeninja', [])
         };
 
         this.apply_rules = function() {
+            dc.reset_colors();
             for (i = 0; i < dc.bytes.length; i++) {
                 for (j = 0; j < dc.rules.length; j++) {
                     dc.rules[j].apply(dc.bytes, i);
                 }
+            }
+        };
+
+        this.reset_colors = function() {
+            for (i = 0; i < dc.bytes.length; i++) {
+                dc.bytes[i].style = {};
             }
         };
 

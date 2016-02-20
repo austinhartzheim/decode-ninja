@@ -68,18 +68,16 @@ function RuleFindConstantBytes() {
     this.sequence_index = 0;
     this.apply = function(bytes, i) {
         target = this.fields.byte_sequence.value.split(',');
+        if (target.length == 0) return;
         for (j = 0; j < target.length; j++)
             target[j] = parseInt(target[j], 16);
-        console.log(target);
 
         if (bytes[i].d == target[this.sequence_index]) {
             this.sequence_index++;
         } else {
             this.sequence_index = 0;
         }
-        console.log(this.sequence_index);
         if (this.sequence_index >= target.length) {
-            console.log('Recoloring');
             for (j = i; j > i - target.length; j--) {
                 console.log('Recoloring byte', j);
                 bytes[j].style.background = 'yellow';
