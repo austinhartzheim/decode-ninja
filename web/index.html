@@ -43,8 +43,10 @@
         </div>
       </div>
 
-      <div id="rules-box" ng-if="dc.pane === 'pane-decode'">
-        <h2>add a rule</h2>
+      <div id="controls" ng-if="dc.pane === 'pane-decode'">
+        <h2>Controls</h2>
+        <button ng-click="dc.pane='pane-upload-file';">Switch File</button>
+        <h2>Add a Processor</h2>
         <div
            ng-repeat="rule in dc.list_available_rules()"
            title="{{ rule.desc }}">
@@ -52,7 +54,7 @@
           <a href="#" ng-click="dc.add_rule(rule.obj);">[+]</a> {{ rule.name }}
         </div>
 
-        <h2>current rules</h2>
+        <h2>Applied Processors</h2>
         <div
            ng-repeat="rule in dc.rules"
            class="rule">

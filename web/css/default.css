@@ -31,7 +31,7 @@ header {
 
 #binary-view,
 #char-view,
-#rules-box {
+#controls {
     width: 60ex;
     float: left;
     margin-left: 10px;
