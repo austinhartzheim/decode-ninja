@@ -89,18 +89,50 @@ angular.module('decodeninja', [])
                     console.log(data);
                     dc.rules = [];
                     for (var i = 0; i < data.rules.length; i++) {
-                        rule = new rules[data.rules[i].id].obj();
-                        for (fn of Object.keys(data.rules[i].fields)) {
-                            console.log('rule.fields', rule.fields);
-                            console.log('attempting to store to', fn, 'value', data.rules[i].fields[fn]);
-                            rule.fields[fn].value = data.rules[i].fields[fn];
-                        }
-                        dc.rules.push(rule);
+                        $session.$apply(function() {
+                            rule = new rules[data.rules[i].id].obj();
+                            for (fn of Object.keys(data.rules[i].fields)) {
+                                console.log('rule.fields', rule.fields);
+                                console.log('attempting to store to', fn, 'value', data.rules[i].fields[fn]);
+                                rule.fields[fn].value = data.rules[i].fields[fn];
+                            }
+                            dc.rules.push(rule);
+                        });
                     }
                 })
                 .fail(function() {
                     console.log('Request to API failed.');
                     dc.session_id = null;
+                });
+        };
+
+        this.save_session = function() {
+            if (!this.session_id) {
+                this.session_id = Math.round(Math.random() * 9999999);
+                console.log('Generated new Session ID:', this.session_id);
+            }
+
+            obj = {id: this.session_id, rules: []};
+            for (var i = 0; i < dc.rules.length; i++) {
+                
+            }
+
+            // POST the data
+            $.ajax('https://qn05wlnvgl.execute-api.us-east-1.amazonaws.com/prod/save-session',
+                   {
+                       method: 'POST',
+                       data: JSON.stringify(obj),
+                       headers: {
+                           'x-api-key': 'aWrq3X0KxJabMFy0F7ftm2pJsULPF0mu6jEz8PDz'
+                       }
+                   }
+                  )
+                .done(function(data) {
+                    console.log(data);
+                })
+                .fail(function(error) {
+                    console.log('Save failed');
+                    console.log(error);
                 });
         };
     }]);
