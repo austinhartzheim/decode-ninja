@@ -34,13 +34,12 @@
         
         <div id="char-view">
           <h2>Text View</h2>
-          <span
-             id="char-{{$index}}"
-             class="byte"
-             ng-style="byte.style"
-             ng-mouseenter="dc.activate_hover($index);"
-             ng-mouseleave="dc.deactivate_hover($index);"
-             ng-repeat="byte in dc.bytes">{{ byte.c }}</span>
+          <span class="byte"
+                id="char-{{$index}}"
+                ng-style="byte.style"
+                ng-mouseenter="dc.activate_hover($index);"
+                ng-mouseleave="dc.deactivate_hover($index);"
+                ng-repeat="byte in dc.bytes track by $index">{{ byte.c }}</span>
         </div>
       </div>
 
@@ -66,7 +65,7 @@
           <div ng-repeat="field in rule.fields track by $index">
             {{ field.name }}:
             <input type="{{ field.type }}" ng-model="field.value"
-                   ng-change="dc.apply_rules()" />
+                   ng-change="count=0;dc.apply_rules()" />
           </div>
         </div>
       </div>
