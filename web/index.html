@@ -4,6 +4,7 @@
     <title>decode.ninja - collaborative binary reverse engineering</title>
     <link rel="stylesheet" type="text/css" href="css/default.css" />
     <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/rules.js"></script>
     <script type="text/javascript" src="js/utils.js"></script>
@@ -46,6 +47,8 @@
       <div id="controls" ng-if="dc.pane === 'pane-decode'">
         <h2>Controls</h2>
         <button ng-click="dc.pane='pane-upload-file';">Switch File</button>
+        <button ng-click="dc.restore_session();">Restore Session</button>
+        <p ng-if="dc.session_id">Session ID: {{ dc.session_id }}</p>
         <h2>Add a Processor</h2>
         <div
            ng-repeat="rule in dc.list_available_rules()"

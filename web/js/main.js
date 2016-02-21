@@ -11,6 +11,7 @@ angular.module('decodeninja', [])
         this.bytes = [];
         this.plain = [];
         this.rules = [];
+        this.session_id = null;
         this.upload_box = null;
         this.hover_index = -1;
         this.check_file = function() {
@@ -78,5 +79,28 @@ angular.module('decodeninja', [])
         };
         this.deactivate_hover = function(index) {
             this.bytes[index].style.opacity = 1;
+        };
+
+        this.restore_session = function() {
+            this.session_id = parseInt(prompt('Please enter a session ID number:'));
+            $.post('https://qn05wlnvgl.execute-api.us-east-1.amazonaws.com/prod/new-session-save',
+                   JSON.stringify({id: this.session_id}))
+                .done(function(data) {
+                    console.log(data);
+                    dc.rules = [];
+                    for (var i = 0; i < data.rules.length; i++) {
+                        rule = new rules[data.rules[i].id].obj();
+                        for (fn of Object.keys(data.rules[i].fields)) {
+                            console.log('rule.fields', rule.fields);
+                            console.log('attempting to store to', fn, 'value', data.rules[i].fields[fn]);
+                            rule.fields[fn].value = data.rules[i].fields[fn];
+                        }
+                        dc.rules.push(rule);
+                    }
+                })
+                .fail(function() {
+                    console.log('Request to API failed.');
+                    dc.session_id = null;
+                });
         };
     }]);

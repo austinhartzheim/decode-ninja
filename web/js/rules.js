@@ -31,7 +31,7 @@ rules.push({
     name: 'Highlight Newlines',
     desc: 'Find newline characters in a file and highlight them.',
     obj: RuleHighlightNewLines,
-    id: 1
+    id: 0
 });
 
 
@@ -65,7 +65,7 @@ rules.push({
     name: 'Highlight Null Bytes',
     desc: 'Highlight all null (zero) bytes in a file.',
     obj: RuleHighlightNullBytes,
-    id: 2
+    id: 1
 });
 
 
@@ -113,7 +113,7 @@ rules.push({
     name: 'Find Constant Byte Sequences',
     desc: '...',
     obj: RuleFindConstantBytes,
-    id: 3
+    id: 2
 });
 
 
@@ -147,7 +147,7 @@ rules.push({
     name: 'Comment',
     desc: 'Place a comment on a specific byte,',
     obj: RuleComment,
-    id: 4
+    id: 3
 });
 
 count = 0;
@@ -263,5 +263,5 @@ rules.push({
     name: 'Prefix, Length, Payload',
     desc: 'Detect the standard prefix, length, data payloads.',
     obj: RulePrefixLengthData,
-    id: 5
+    id: 4
 });
