@@ -23,6 +23,16 @@ function RuleHighlightNewLines() {
         }
     };
 
+    this.save = function() {
+        return {
+            id: 0,
+            fields: {
+                color_fg: this.fields.color_fg.value,
+                color_bg: this.fields.color_bg.value
+            }
+        };
+    };
+
     this.post_apply = function(bytes) {
 
     };
@@ -47,6 +57,16 @@ function RuleHighlightNullBytes() {
             value: 'red',
             type: 'text'
         }
+    };
+
+    this.save = function() {
+        return {
+            id: 1,
+            fields: {
+                color_fg: this.fields.color_fg.value,
+                color_bg: this.fields.color_bg.value
+            }
+        };
     };
 
     this.name = 'Highlight Null Bytes';
@@ -81,6 +101,16 @@ function RuleFindConstantBytes() {
             value: '',
             type: 'text'
         }
+    };
+
+    this.save = function() {
+        return {
+            id: 2,
+            fields: {
+                byte_sequence: this.fields.byte_sequence.value,
+                comment: this.fields.comment.value
+            }
+        };
     };
 
     this.name = 'Find Constant Byte Sequences';
@@ -133,6 +163,16 @@ function RuleComment() {
 
     this.name = 'Comment';
 
+    this.save = function() {
+        return {
+            id: 3,
+            fields: {
+                byte_index: this.fields.byte_index.value,
+                comment: this.fields.comment.value
+            }
+        };
+    };
+
     this.apply = function(bytes, i) {
 
     };
@@ -166,6 +206,16 @@ function RulePrefixLengthData() {
     };
 
     this.name = 'Prefix, Length, Payload';
+
+    this.save = function() {
+        return {
+            id: 4,
+            fields: {
+                prefix: this.fields.prefix.value,
+                length_byte_count: this.fields.length_byte_count.value
+            }
+        };
+    };
 
     this.sequence_index = 0;
     this.data_size = 0;

@@ -81,6 +81,10 @@ angular.module('decodeninja', [])
             this.bytes[index].style.opacity = 1;
         };
 
+        this.apply_hack = function() {
+            $scope.$apply(function() {});
+        };
+
         this.restore_session = function() {
             this.session_id = parseInt(prompt('Please enter a session ID number:'));
             $.post('https://qn05wlnvgl.execute-api.us-east-1.amazonaws.com/prod/new-session-save',
@@ -89,16 +93,16 @@ angular.module('decodeninja', [])
                     console.log(data);
                     dc.rules = [];
                     for (var i = 0; i < data.rules.length; i++) {
-                        $session.$apply(function() {
-                            rule = new rules[data.rules[i].id].obj();
-                            for (fn of Object.keys(data.rules[i].fields)) {
-                                console.log('rule.fields', rule.fields);
-                                console.log('attempting to store to', fn, 'value', data.rules[i].fields[fn]);
-                                rule.fields[fn].value = data.rules[i].fields[fn];
-                            }
-                            dc.rules.push(rule);
-                        });
+                        rule = new rules[data.rules[i].id].obj();
+                        for (fn of Object.keys(data.rules[i].fields)) {
+                            console.log('rule.fields', rule.fields);
+                            console.log('attempting to store to', fn, 'value', data.rules[i].fields[fn]);
+                            rule.fields[fn].value = data.rules[i].fields[fn];
+                        }
+                        dc.rules.push(rule);
                     }
+                    dc.apply_rules();
+                    dc.apply_hack();
                 })
                 .fail(function() {
                     console.log('Request to API failed.');
@@ -107,14 +111,12 @@ angular.module('decodeninja', [])
         };
 
         this.save_session = function() {
-            if (!this.session_id) {
-                this.session_id = Math.round(Math.random() * 9999999);
-                console.log('Generated new Session ID:', this.session_id);
-            }
+            this.session_id = Math.round(Math.random() * 9999999);
+            console.log('Generated new Session ID:', this.session_id);
 
             obj = {id: this.session_id, rules: []};
             for (var i = 0; i < dc.rules.length; i++) {
-                
+                obj.rules.push(dc.rules[i].save());
             }
 
             // POST the data
