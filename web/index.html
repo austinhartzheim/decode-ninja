@@ -16,14 +16,14 @@
 
     <section id="main" ng-controller="DecodeController as dc">
       <div id="pane-upload-file" ng-if="dc.pane === 'pane-upload-file'">
-	    <h2>select a file</h2>
-	    <p><input id="file-upload" type="file"
+	      <h2>select a file</h2>
+	      <p><input id="file-upload" type="file"
                   onchange="angular.element(this).scope().dc.file_changed(this.files[0])" />
-	    <p><button id="process-button" ng-click="dc.check_file(); dc.pane='pane-decode'">Process</button></p>
+	      <p><button id="process-button" ng-click="dc.check_file(); dc.pane='pane-decode'">Process</button></p>
       </div>
       
       <div id="pane-decode" ng-if="dc.pane === 'pane-decode'">
-	    <div id="binary-view">
+	      <div id="binary-view">
           <h2>Hex View</h2>
           <span class="byte"
                 id="byte-{{$index}}"
@@ -31,7 +31,7 @@
                 ng-mouseenter="dc.activate_hover($index);"
                 ng-mouseleave="dc.deactivate_hover($index);"
                 ng-repeat="byte in dc.bytes track by $index">{{ byte.d.toString(16); }}</span>
-	    </div>
+	      </div>
         
         <div id="char-view">
           <h2>Text View</h2>
