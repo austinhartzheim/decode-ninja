@@ -1,29 +1,13 @@
-body {
-    background: black;
-    color: white;
-    text-align: center;
-}
-
-#main {
-    text-align: left;
-    display: inline-block;
-}
-
-header {
-    border-bottom: 1px solid white;
-    margin-bottom: 10px;
-}
-
 .byte {
     margin: 4px;
     padding: 2px;
-    background: #2a2a2a;
+ /*   background: #2a2a2a;*/
     font-family: monospace;
     width: 2em;
     display: inline-block;
     text-align: center;
     white-space: pre;
-    border-color: white;  /* Not expressed here; activated via JS on hover */
+    border-color: black;  /* Not expressed here; activated via JS on hover */
     box-sizing: border-box;
 }
 .byte:hover {
@@ -34,38 +18,4 @@ header {
     display: inline-block;
     padding: 0px;
     margin: 0px;
-}
-
-#binary-view,
-#char-view,
-#controls {
-    width: 32%;
-    float: left;
-    margin-left: 10px;
-}
-
-.rule {
-    background: #2a2a2a;
-    padding: 4px;
-    margin-bottom: 8px;
-}
-.rule h2 {
-    margin: 0px;
-    font-size: 12pt;
-}
-
-h1 {
-    font-size: 20pt;
-}
-
-h2 {
-    font-size: 14pt;
-}
-
-h3 {
-    font-size: 10pt;
-}
-
-a {
-    color: white;
 }

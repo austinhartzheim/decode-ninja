@@ -3,27 +3,59 @@
   <head>
     <title>decode.ninja - collaborative binary reverse engineering</title>
     <link rel="stylesheet" type="text/css" href="css/default.css" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="lib/bootstrap/3.3.6/css/bootstrap.min.css"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+          crossorigin="anonymous">
+    <script src="lib/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script>
+
+    <!-- Other -->
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+
+    <!-- App -->
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/rules.js"></script>
     <script type="text/javascript" src="js/utils.js"></script>
   </head>
   <body>
-    <header>
-      <h1>decode.ninja</h1>
-    </header>
 
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">decode.ninja</a>
+        </div>
+
+        <ul class="nav navbar-nav">
+          <li><a href="#">New Project</a></li>
+          <li><a href="#">Browse</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Log In</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    
     <section id="main" ng-controller="DecodeController as dc">
-      <div id="pane-upload-file" ng-if="dc.pane === 'pane-upload-file'">
-	      <h2>select a file</h2>
-	      <p><input id="file-upload" type="file"
-                  onchange="angular.element(this).scope().dc.file_changed(this.files[0])" />
-	      <p><button id="process-button" ng-click="dc.check_file(); dc.pane='pane-decode'">Process</button></p>
+      <div id="pane-upload-file" ng-if="dc.pane === 'pane-upload-file'" class="container">
+	<h2>select a file</h2>
+	<p><label class="btn btn-primary" for="file-upload">
+            <input id="file-upload" type="file" style="display: none;"
+                   onchange="angular.element(this).scope().dc.file_changed(this.files[0])" />
+            Select file
+          </label>
+        </p>
+	<p><button class="btn btn-primary" id="process-button"
+                   ng-click="dc.check_file(); dc.pane='pane-decode'">Process</button></p>
       </div>
       
-      <div id="pane-decode" ng-if="dc.pane === 'pane-decode'">
-	      <div id="binary-view">
+      <div id="pane-decode" ng-if="dc.pane === 'pane-decode'" class="container">
+	<div id="binary-view" class="col-md-4">
           <h2>Hex View</h2>
           <span class="byte"
                 id="byte-{{$index}}"
@@ -31,9 +63,9 @@
                 ng-mouseenter="dc.activate_hover($index);"
                 ng-mouseleave="dc.deactivate_hover($index);"
                 ng-repeat="byte in dc.bytes track by $index">{{ byte.d.toString(16); }}</span>
-	      </div>
+	</div>
         
-        <div id="char-view">
+        <div id="char-view" class="col-md-4">
           <h2>Text View</h2>
           <span class="byte"
                 id="char-{{$index}}"
@@ -42,38 +74,48 @@
                 ng-mouseleave="dc.deactivate_hover($index);"
                 ng-repeat="byte in dc.bytes track by $index">{{ byte.c }}</span>
         </div>
-      </div>
+        
+        <div id="controls" class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">Controls</div>
+            <div class="panel-body">
+              <button ng-click="dc.pane='pane-upload-file';" class="btn btn-primary">Switch File</button>
+              <button ng-click="dc.restore_session();" class="btn btn-primary">Restore Session</button>
+              <button ng-click="dc.save_session();" class="btn btn-primary">Save Session</button>
+              <p ng-if="dc.session_id">Session ID: {{ dc.session_id }}</p>
+            </div>
+          </div>
 
-      <div id="controls" ng-if="dc.pane === 'pane-decode'">
-        <h2>Controls</h2>
-        <button ng-click="dc.pane='pane-upload-file';">Switch File</button>
-        <button ng-click="dc.restore_session();">Restore Session</button>
-        <button ng-click="dc.save_session();">Save Session</button>
-        <p ng-if="dc.session_id">Session ID: {{ dc.session_id }}</p>
-        <h2>Add a Processor</h2>
-        <div
-           ng-repeat="rule in dc.list_available_rules()"
-           title="{{ rule.desc }}">
-          
-          <a href="#" ng-click="dc.add_rule(rule.obj);">[+]</a> {{ rule.name }}
-        </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">Add a Processor</div>
+            <div class="panel-body">
+              <div
+                 ng-repeat="rule in dc.list_available_rules()"
+                 title="{{ rule.desc }}">
+                <a href="#" ng-click="dc.add_rule(rule.obj);">[+]</a> {{ rule.name }}
+              </div>
+            </div>
+          </div>
 
-        <h2>Applied Processors</h2>
-        <div ng-if="dc.rules.length == 0">
-          <p>No processors currently applied.</p>
-        </div>
-        <div
-           ng-repeat="rule in dc.rules"
-           class="rule">
-          <h2><a href="#" ng-click="dc.remove_rule($index);">[X]</a> {{ rule.name }}</h2>
-          <div ng-repeat="field in rule.fields track by $index">
-            {{ field.name }}:
-            <input type="{{ field.type }}" ng-model="field.value"
-                   ng-change="count=0;dc.apply_rules()" />
+          <div class="panel panel-default">
+            <div class="panel-heading">Active Processors</div>
+            <div class="panel-body" ng-if="dc.rules.length == 0">
+              <p>No processors currently applied.</p>
+            </div>
+            <ul class="list-group" ng-repeat="rule in dc.rules">
+              <li class="list-group-item">
+                <a href="#" ng-click="dc.remove_rule($index);">[X]</a> {{ rule.name }}
+                <div ng-repeat="field in rule.fields track by $index">
+                  {{ field.name }}:
+                  <input type="{{ field.type }}" class="form-control"
+                         ng-model="field.value" ng-change="count=0;dc.apply_rules()" />
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      
+        
     </section>
   </body>
 </html>
