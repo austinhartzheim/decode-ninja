@@ -44,7 +44,7 @@
     <section id="main" ng-controller="DecodeController as dc">
       <div id="pane-upload-file" ng-if="dc.pane === 'pane-upload-file'" class="container">
 	<h2>select a file</h2>
-	<p><label class="btn btn-primary" for="file-upload">
+	<p><label class="btn btn-default" for="file-upload">
             <input id="file-upload" type="file" style="display: none;"
                    onchange="angular.element(this).scope().dc.file_changed(this.files[0])" />
             Select file
@@ -79,9 +79,11 @@
           <div class="panel panel-default">
             <div class="panel-heading">Controls</div>
             <div class="panel-body">
-              <button ng-click="dc.pane='pane-upload-file';" class="btn btn-primary">Switch File</button>
-              <button ng-click="dc.restore_session();" class="btn btn-primary">Restore Session</button>
-              <button ng-click="dc.save_session();" class="btn btn-primary">Save Session</button>
+              <button ng-click="dc.pane='pane-upload-file';" class="btn btn-default">Switch File</button>
+              <div class="btn-group" role="group">
+                <button ng-click="dc.restore_session();" class="btn btn-default">Restore Session</button>
+                <button ng-click="dc.save_session();" class="btn btn-default">Save Session</button>
+              </div>
               <p ng-if="dc.session_id">Session ID: {{ dc.session_id }}</p>
             </div>
           </div>
