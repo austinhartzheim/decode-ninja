@@ -5,12 +5,12 @@ function RuleHighlightNewLines() {
   this.fields = {
     color_fg: {
       name: 'Foreground Color',
-      value: 'black',
+      value: 'red',
       type: 'text'
     },
     color_bg: {
       name: 'Background Color',
-      value: 'white',
+      value: 'lightgray',
       type: 'text'
     }
   };
