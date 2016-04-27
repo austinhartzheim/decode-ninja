@@ -11,7 +11,7 @@
     box-sizing: border-box;
 }
 .byte:hover {
-    background: #444;
+    background: #ccc;
 }
 
 .packet {
